@@ -25,18 +25,18 @@ Installation
 To get started with Caffiend, follow these steps:
 1. Clone the Repository
 
-git clone https://github.com/your-username/caffiend.git
-cd caffiend
+        git clone https://github.com/your-username/caffiend.git
+        cd caffiend
 
 2. Install Dependencies
 
 For the frontend, use npm or yarn to install dependencies:
 
-npm install
+        npm install
 
-or
-
-yarn install
+        or
+        
+        yarn install
 
 For the backend, ensure you have Firebase SDK set up and configured as explained in the Firebase Setup section below.
 Firebase Setup
@@ -59,12 +59,12 @@ If you haven't already, create a Firebase project:
 
 In your project, create a .env file to store your Firebase credentials. Here's an example configuration for the .env file:
 
-VITE_FIREBASE_API_KEY=your-firebase-api-key
-VITE_FIREBASE_AUTH_DOMAIN=your-auth-domain
-VITE_FIREBASE_PROJECT_ID=your-project-id
-VITE_FIREBASE_STORAGE_BUCKET=your-storage-bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
-VITE_FIREBASE_APP_ID=your-app-id
+        VITE_FIREBASE_API_KEY=your-firebase-api-key
+        VITE_FIREBASE_AUTH_DOMAIN=your-auth-domain
+        VITE_FIREBASE_PROJECT_ID=your-project-id
+        VITE_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+        VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+        VITE_FIREBASE_APP_ID=your-app-id
 
 Ensure that the Firebase config in your frontend matches your Firebase credentials.
 App Configuration
@@ -74,14 +74,14 @@ In the frontend code, update the Firebase config to match the credentials in you
 
 import { initializeApp } from 'firebase/app';
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
+        const firebaseConfig = {
+          apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+          authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+          projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+          storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+          appId: import.meta.env.VITE_FIREBASE_APP_ID,
+        };
 
 const app = initializeApp(firebaseConfig);
 
