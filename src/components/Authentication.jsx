@@ -1,12 +1,51 @@
+import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 
-const Authentication = () => {
+const Authentication = ({ handleCloseModal }) => {
   const [isRegistration, setIsRegistration] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleAuth = async () => {};
+  const {
+    globalUser,
+    globalData,
+    setGlobalData,
+    isLoading,
+    signup,
+    login,
+    resetPassword,
+    logout,
+  } = useAuth();
+
+  const handleAuth = async () => {
+    if (
+      !email ||
+      !email.includes("@") ||
+      !password ||
+      password.length < 6 ||
+      isAuthenticating
+    )
+      return;
+
+    try {
+      setIsAuthenticating(true);
+      setError(null);
+
+      if (isRegistration) {
+        await signup(email, password);
+      } else {
+        await login(email, password);
+      }
+      handleCloseModal();
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
 
   return (
     <>
@@ -14,6 +53,7 @@ const Authentication = () => {
       <p>
         {isRegistration ? "Create an account!" : "Sign in to your account!"}
       </p>
+      {error && <div>❌ {error}</div>}
       <input
         type="email"
         value={email}
@@ -26,7 +66,9 @@ const Authentication = () => {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="********"
       />
-      <button onClick={handleAuth}>Submit</button>
+      <button onClick={handleAuth}>
+        {isAuthenticating ? "Loading..." : "Submit"}
+      </button>
       <hr />
 
       <div className="register-content">
