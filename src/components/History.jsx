@@ -1,11 +1,12 @@
+import { useAuth } from "../context/AuthContext";
 import {
   calculateCurrentCaffeineLevel,
-  coffeeConsumptionHistory,
   getCaffeineAmount,
   timeSinceConsumption,
 } from "../utils";
 
 const History = () => {
+  const { globalData } = useAuth();
   return (
     <>
       <div className="section-header">
@@ -17,10 +18,10 @@ const History = () => {
         <i>Hover for more information!</i>
       </p>
       <div className="coffee-history">
-        {Object.keys(coffeeConsumptionHistory)
+        {Object.keys(globalData)
           .sort((a, b) => b - a)
           .map((utcTime, i) => {
-            const coffee = coffeeConsumptionHistory[utcTime];
+            const coffee = globalData[utcTime];
             const timeSinceConsume = timeSinceConsumption(utcTime);
             const originalAmount = getCaffeineAmount(coffee.name);
             const remainingAmount = calculateCurrentCaffeineLevel({

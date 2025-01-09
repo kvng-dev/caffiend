@@ -49,13 +49,13 @@ export function AuthContextProvider({ children }) {
       try {
         setIsLoading(true);
 
-        const docRef = doc.apply(db, "users", user.uid);
+        const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
         let firebaseData = {};
         if (docSnap.exists()) {
-          console.log("Found user data");
           firebaseData = docSnap.data();
+          console.log("Found user data", firebaseData);
         }
         setGlobalData(firebaseData);
       } catch (error) {
